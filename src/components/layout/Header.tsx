@@ -174,9 +174,22 @@ export default function Header() {
               <div className="flex items-center space-x-6">
                 <div className="flex items-center space-x-2 text-gray-300">
                   <Calendar size={14} />
-                  <span className="font-medium" suppressHydrationWarning>{currentDate}</span>
+                  <span className="font-medium" suppressHydrationWarning>
+                    {new Date().toLocaleDateString('en-IN', {
+                      weekday: 'long',
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </span>
                   <span className="text-gray-500">|</span>
-                  <span className="font-medium" suppressHydrationWarning>{currentTime}</span>
+                  <span className="font-medium" suppressHydrationWarning>
+                    {new Date().toLocaleTimeString('en-IN', {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                      hour12: true
+                    })}
+                  </span>
                 </div>
                 <div className="hidden md:flex items-center space-x-2 text-gray-300">
                   <MapPin size={14} />

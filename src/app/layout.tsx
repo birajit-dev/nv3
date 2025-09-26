@@ -27,10 +27,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <head>
-        {/* Google Tag Manager */}
+        {/* Google Tag Manager - Defer to improve initial load */}
         <Script
           id="gtm-script"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -53,9 +53,9 @@ export default function RootLayout({
         {/* Critical Resource Preloader */}
         <CriticalResourcePreloader />
         
-        {/* Google Analytics - Defer for performance */}
+        {/* Google Analytics (gtag.js) */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"
+          src="https://www.googletagmanager.com/gtag/js?id=G-4PKRRJ1GE4"
           strategy="afterInteractive"
         />
         <Script
@@ -66,11 +66,17 @@ export default function RootLayout({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'GA_MEASUREMENT_ID', {
-                send_page_view: false
-              });
+              gtag('config', 'G-4PKRRJ1GE4');
             `,
           }}
+        />
+        
+        {/* Google AdSense Auto Ads - Defer for better initial performance */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2682479332426024"
+          crossOrigin="anonymous"
+          strategy="lazyOnload"
         />
         
         {/* Favicon */}
@@ -85,28 +91,34 @@ export default function RootLayout({
         {/* Theme color */}
         <meta name="theme-color" content="#2563eb" />
         
-        {/* Verification tags */}
-        <meta name="google-site-verification" content="your-google-verification-code" />
+        {/* Google AdSense Account */}
+        <meta name="google-adsense-account" content="ca-pub-2682479332426024" />
         
-        {/* Performance script to measure loading */}
+        {/* Verification tags */}
+        <meta name="google-site-verification" content="FK9NR0AATT321BoVLPzZEJhIEwIqs3m3Q_5OZbSu0cI" />
+        
+        {/* Optimized performance script */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              // Performance measurement
-              window.addEventListener('load', function() {
-                setTimeout(function() {
-                  document.body.classList.add('js-loaded');
-                  document.body.classList.remove('js-loading');
-                  
-                  // Send performance data to analytics
-                  if (typeof gtag !== 'undefined') {
-                    gtag('event', 'page_load_time', {
-                      value: Math.round(performance.now()),
-                      event_category: 'Performance'
-                    });
-                  }
-                }, 100);
-              });
+              // Optimized performance measurement
+              (function() {
+                // Show content immediately
+                document.body.classList.add('js-loaded');
+                document.body.classList.remove('js-loading');
+                
+                // Defer analytics until after load
+                window.addEventListener('load', function() {
+                  setTimeout(function() {
+                    if (typeof gtag !== 'undefined') {
+                      gtag('event', 'page_load_time', {
+                        value: Math.round(performance.now()),
+                        event_category: 'Performance'
+                      });
+                    }
+                  }, 1000);
+                });
+              })();
             `,
           }}
         />

@@ -14,7 +14,7 @@ export default function LazySection({
   children,
   fallback = <div className="h-32 bg-gray-100 animate-pulse rounded" />,
   threshold = 0.1,
-  rootMargin = '50px',
+  rootMargin = '100px', // Increased for earlier loading
   className = ''
 }: LazySectionProps) {
   const [isVisible, setIsVisible] = useState(false);
@@ -22,29 +22,39 @@ export default function LazySection({
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasLoaded) {
-          setIsVisible(true);
-          setHasLoaded(true);
-          // Unobserve after loading to improve performance
-          observer.unobserve(entry.target);
-        }
-      },
-      {
-        threshold,
-        rootMargin
+    // Use requestIdleCallback for better performance
+    const scheduleObserver = () => {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => setupObserver());
+      } else {
+        setTimeout(setupObserver, 0);
       }
-    );
+    };
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
+    const setupObserver = () => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting && !hasLoaded) {
+            setIsVisible(true);
+            setHasLoaded(true);
+            observer.disconnect(); // Disconnect immediately after loading
+          }
+        },
+        {
+          threshold,
+          rootMargin
+        }
+      );
+
+      if (ref.current) {
+        observer.observe(ref.current);
+      }
+    };
+
+    scheduleObserver();
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
+      // Cleanup handled by disconnect in observer
     };
   }, [threshold, rootMargin, hasLoaded]);
 
