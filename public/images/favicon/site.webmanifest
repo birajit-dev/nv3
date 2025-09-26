@@ -1,0 +1,26 @@
+{
+  "name": "Northeast Herald - Tripura News",
+  "short_name": "Northeast Herald",
+  "description": "Tripura's #1 News Source | Latest News from Agartala, Northeast India",
+  "icons": [
+    {
+      "src": "/images/favicon/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/favicon/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#2563eb",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
+  "orientation": "portrait-primary",
+  "categories": ["news", "media", "information"],
+  "lang": "en-IN",
+  "dir": "ltr"
+}
