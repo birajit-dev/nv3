@@ -131,6 +131,22 @@ export default function Home() {
                     <div className="text-xs text-gray-400 mb-1 p-2">Advertisement</div>
                     <div className="relative w-full h-full">
                       <OptimizedImage
+                        src="https://i.ibb.co/F4t7r5r7/Screenshot-2025-07-17-at-10-19-08-PM.png"
+                        alt="ICFAI Advertisement"
+                        width={300}
+                        height={250}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </LazySection>
+
+                {/* Additional Sidebar Ads - Lazy load */}
+                <LazySection fallback={<div className="h-64 bg-gray-100 animate-pulse rounded" />}>
+                  <div className="bg-white border border-gray-200 rounded-lg overflow-hidden w-full">
+                    <div className="text-xs text-gray-400 mb-1 p-2">Advertisement</div>
+                    <div className="relative w-full h-full">
+                      <OptimizedImage
                         src="https://i.ibb.co/3529h4qD/icfai-ads.jpg"
                         alt="ICFAI Advertisement"
                         width={300}
