@@ -215,13 +215,13 @@ export default function ExclusiveSection() {
                   </div>
                   
                   <div className="relative w-32 h-24 flex-shrink-0">
-                    <Image
-                      src={getImageSrc(article.post_image)}
-                      alt={article.post_name}
-                      fill
-                      className="object-contain"
-                      sizes="128px"
-                    />
+                  <Image
+                    src={getImageSrc(article.post_image)}
+                    alt={article.post_name}
+                    fill
+                    sizes="128px"
+                    className="!object-fill" // force override
+                  />
                   </div>
                   
                   <div className="p-3 flex-1 flex flex-col justify-between">
@@ -259,7 +259,7 @@ export default function ExclusiveSection() {
                         src={getImageSrc(article.post_image)}
                         alt={article.post_name}
                         fill
-                        className="object-contain group-hover:scale-105 transition-transform duration-300"
+                        className="object-fill group-hover:scale-105 transition-transform duration-300"
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     </div>

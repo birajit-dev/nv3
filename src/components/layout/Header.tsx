@@ -244,48 +244,49 @@ export default function Header() {
       </header>
 
       {/* Header with Logo and Navigation - Sticky on mobile, static on desktop */}
-      <div className="bg-white border-b border-gray-100 sticky top-0 z-50 lg:static w-full h-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full">
-          <div className="flex items-center justify-between h-32 lg:h-40 w-full">
-            {/* Left spacer for desktop */}
-            <div className="hidden lg:flex flex-1 h-full"></div>
+      <div className="bg-white border-b border-gray-100 sticky top-0 z-50 lg:static w-full">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <div className="flex items-center justify-between h-28 lg:h-56 w-full"> 
+      {/* Left spacer for desktop */}
+      <div className="hidden lg:flex flex-1 h-full"></div>
 
-            {/* Logo - centered on desktop, left on mobile */}
-            <div className="flex items-center lg:flex-1 lg:justify-center w-full h-full">
-              <Link href="/" className="flex items-center w-full h-full">
-                <Image
-                  src="/images/neherald_logo.png"
-                  alt="Northeast Herald Logo"
-                  width={800}
-                  height={700}
-                  className="h-full w-full mr-3 lg:w-full lg:h-full object-contain"
-                  priority
-                />
-              </Link>
-            </div>
-
-            {/* Right side actions */}
-            <div className="flex items-center space-x-3 lg:flex-1 lg:justify-end h-full">
-              <Link
-                href="/search"
-                className="p-2 text-gray-600 hover:text-red-600 transition-colors rounded-lg hover:bg-gray-50"
-                aria-label="Search"
-              >
-                <Search size={20} />
-              </Link>
-
-              {/* Mobile menu button */}
-              <button
-                onClick={toggleMobileMenu}
-                className="lg:hidden p-2 text-gray-600 hover:text-red-600 transition-colors rounded-lg hover:bg-gray-50"
-                aria-label="Toggle menu"
-              >
-                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            </div>
-          </div>
-        </div>
+      {/* Logo - centered on desktop, left on mobile */}
+      <div className="flex items-center lg:flex-1 lg:justify-center w-full h-full">
+        <Link href="/" className="flex items-center w-full h-full">
+          <Image
+            src="/images/neherald_logo.png"
+            alt="Northeast Herald Logo"
+            width={800}
+            height={700}
+            priority
+            className="h-full w-auto max-w-[500px] lg:max-w-[700px] object-contain"
+          />
+        </Link>
       </div>
+
+      {/* Right side actions */}
+      <div className="flex items-center space-x-3 lg:flex-1 lg:justify-end h-full">
+        <Link
+          href="/search"
+          className="p-2 text-gray-600 hover:text-red-600 transition-colors rounded-lg hover:bg-gray-50"
+          aria-label="Search"
+        >
+          <Search size={20} />
+        </Link>
+
+        {/* Mobile menu button */}
+        <button
+          onClick={toggleMobileMenu}
+          className="lg:hidden p-2 text-gray-600 hover:text-red-600 transition-colors rounded-lg hover:bg-gray-50"
+          aria-label="Toggle menu"
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
       {/* Search Bar - Sticky on mobile, static on desktop */}
       {isSearchOpen && (

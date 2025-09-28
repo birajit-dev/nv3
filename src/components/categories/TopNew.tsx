@@ -147,7 +147,7 @@ export default function TopNew() {
                     src={getImageUrl(topArticle.post_image)}
                     alt={topArticle.post_name}
                     fill
-                    className="object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                    className="object-fill group-hover:scale-[1.02] transition-transform duration-300"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 67vw, 67vw"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -174,7 +174,7 @@ export default function TopNew() {
                     <div className="flex items-center space-x-3">
                       <div className="flex items-center space-x-1">
                         <Eye size={12} />
-                        <span>2.1k</span>
+                        <span></span>
                       </div>
                       <Share2 size={12} className="text-gray-400 hover:text-red-600 cursor-pointer" />
                     </div>

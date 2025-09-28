@@ -37,7 +37,7 @@ const sampleAds: Record<string, AdConfig[]> = {
     {
       id: 'horizontal-1',
       title: 'Banking Services',
-      image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=728&h=90&fit=crop&crop=center',
+      image: '#',
       width: 728,
       height: 90,
     },
@@ -46,7 +46,7 @@ const sampleAds: Record<string, AdConfig[]> = {
     {
       id: 'square-1',
       title: 'Education Services',
-      image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=300&h=300&fit=crop&crop=center',
+      image: '#',
       width: 300,
       height: 300,
     },
@@ -55,7 +55,7 @@ const sampleAds: Record<string, AdConfig[]> = {
     {
       id: 'mobile-1',
       title: 'Mobile App',
-      image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=320&h=100&fit=crop&crop=center',
+      image: '#',
       width: 320,
       height: 100,
     },

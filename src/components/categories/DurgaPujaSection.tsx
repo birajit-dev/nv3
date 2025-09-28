@@ -165,7 +165,7 @@ export default function DurgaPujaSection() {
             src={getImageUrl(firstImage)}
             alt={currentGallery.gallery_title}
             fill
-            className="object-contain"
+            className="object-fill"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 60vw"
             priority={currentIndex === 0}
             quality={85}
