@@ -29,7 +29,7 @@ const navigationItems: NavigationItem[] = [
   { id: '2', name: 'Tripura', slug: '/tripura', color: '#2563eb' },
   { id: '3', name: 'National', slug: '/national', color: '#059669' },
   { id: '4', name: 'International', slug: '/international', color: '#ea580c' },
-  { id: '5', name: 'Showbiz', slug: '/showbiz', color: '#9333ea' },
+  { id: '5', name: 'Job/Tenders', slug: '/adstender', color: '#9333ea' },
   { id: '6', name: 'Northeast', slug: '/northeast', color: '#dc2626' },
   { id: '7', name: 'Health', slug: '/health', color: '#0891b2' },
   { id: '8', name: 'Finance', slug: '/finance', color: '#dc2626' },
@@ -256,8 +256,8 @@ export default function Header() {
           <Image
             src="/images/neherald_logo.png"
             alt="Northeast Herald Logo"
-            width={800}
-            height={700}
+            width={900}
+            height={800}
             priority
             className="h-full w-auto max-w-[500px] lg:max-w-[700px] object-contain"
           />
@@ -445,10 +445,10 @@ export default function Header() {
                     About Tripura
                   </Link>
                   <Link
-                    href="/photo-album"
+                    href="/showbiz"
                     className="block px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors font-medium text-sm border-b border-gray-100"
                   >
-                    Photo Album
+                    Showbiz
                   </Link>
 
                   <Link
