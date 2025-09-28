@@ -16,6 +16,7 @@ import HomepageOptimizer from '@/components/seo/HomepageOptimizer';
 import { generateHomepageSchema } from '@/components/seo/HomepageOptimizer';
 import LazySection, { CriticalSection } from '@/components/performance/LazySection';
 import OptimizedImage from '@/components/performance/OptimizedImage';
+import DurgaPujaSection from '@/components/categories/DurgaPujaSection';
 import { TrendingUp } from 'lucide-react';
 
 export default function Home() {
@@ -66,6 +67,9 @@ export default function Home() {
               
               <LazySection>
                 <NortheastSection />
+              </LazySection>
+              <LazySection>
+                <DurgaPujaSection />
               </LazySection>
 
               <LazySection>

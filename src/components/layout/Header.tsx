@@ -90,6 +90,8 @@ export default function Header() {
   const [breakingNews, setBreakingNews] = useState<BreakingNewsItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [currentTime, setCurrentTime] = useState<Date | null>(null);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     const loadBreakingNews = async () => {
@@ -116,6 +118,18 @@ export default function Header() {
     return () => clearInterval(interval);
   }, []);
 
+  // Initialize client-side and start time updates
+  useEffect(() => {
+    setIsClient(true);
+    setCurrentTime(new Date());
+    
+    const timeInterval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timeInterval);
+  }, []);
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -124,18 +138,19 @@ export default function Header() {
     setIsSearchOpen(!isSearchOpen);
   };
 
-  const currentDate = new Date().toLocaleDateString('en-IN', {
+  const currentDate = currentTime?.toLocaleDateString('en-IN', {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
     day: 'numeric'
-  });
+  }) || '';
 
-  const currentTime = new Date().toLocaleTimeString('en-IN', {
+  const currentTimeString = currentTime?.toLocaleTimeString('en-IN', {
     hour: '2-digit',
     minute: '2-digit',
+    second: '2-digit',
     hour12: true
-  });
+  }) || '';
 
   return (
     <>
@@ -174,22 +189,19 @@ export default function Header() {
               <div className="flex items-center space-x-6">
                 <div className="flex items-center space-x-2 text-gray-300">
                   <Calendar size={14} />
-                  <span className="font-medium" suppressHydrationWarning>
-                    {new Date().toLocaleDateString('en-IN', {
-                      weekday: 'long',
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
-                  </span>
-                  <span className="text-gray-500">|</span>
-                  <span className="font-medium" suppressHydrationWarning>
-                    {new Date().toLocaleTimeString('en-IN', {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                      hour12: true
-                    })}
-                  </span>
+                  {isClient && currentTime ? (
+                    <>
+                      <span className="font-medium">
+                        {currentDate}
+                      </span>
+                      <span className="text-gray-500">|</span>
+                      <span className="font-medium">
+                        {currentTimeString}
+                      </span>
+                    </>
+                  ) : (
+                    <span className="font-medium">Loading...</span>
+                  )}
                 </div>
                 <div className="hidden md:flex items-center space-x-2 text-gray-300">
                   <MapPin size={14} />
@@ -240,15 +252,22 @@ export default function Header() {
             {/* Logo - centered on desktop, left on mobile */}
             <div className="flex items-center lg:flex-1 lg:justify-center">
               <Link href="/" className="flex items-center">
-                <Image
+                {/* <Image
                   src="/images/neherald_logo.png"
                   alt="Northeast Herald Logo"
                   width={200}
                   height={100}
-                  className="h-auto w-auto mr-3"
+                  className="h-auto w-auto mr-3 lg:w-[400px] lg:h-[87px]"
                   priority
+                /> */}
+                <Image
+                src="/images/neherald_logo.png"
+                alt="Northeast Herald Logo"
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={{ width: '100%', height: 'auto' }}
                 />
-               
               </Link>
             </div>
 

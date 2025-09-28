@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Camera, Calendar, Eye, ExternalLink, Images, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Camera, Calendar, Eye, ExternalLink, Images, ChevronLeft, ChevronRight, Sparkles, Star } from 'lucide-react';
 import { format } from 'date-fns';
 
 interface GalleryItem {
@@ -22,7 +22,7 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://app.neherald.co
 
 async function fetchGallery(): Promise<GalleryItem[]> {
   try {
-    const response = await fetch(`${API_BASE_URL}/gallery`);
+    const response = await fetch(`${API_BASE_URL}/durga-puja`);
 
     if (!response.ok) {
       throw new Error('Failed to fetch gallery');
@@ -49,7 +49,7 @@ function getImageUrl(imagePath: string): string {
   return `https://app.neherald.com/uploads/gallery/${imagePath}`;
 }
 
-export default function GallerySection() {
+export default function DurgaPujaSection() {
   const [galleries, setGalleries] = useState<GalleryItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -86,19 +86,22 @@ export default function GallerySection() {
       <section className="mb-12">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-3">
-            <div className="w-1 h-8 bg-gradient-to-b from-purple-500 to-purple-700 rounded-full"></div>
+            <div className="w-1 h-8 bg-gradient-to-b from-orange-500 to-red-600 rounded-full"></div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">Photo Gallery</h2>
-              <p className="text-gray-600 text-sm">Visual stories from Northeast</p>
+              <h2 className="text-2xl font-bold text-gray-900 flex items-center space-x-2">
+                <span>Durga Puja Gallery 2025</span>
+                <Sparkles className="text-orange-500" size={24} />
+              </h2>
+              <p className="text-gray-600 text-sm">Divine celebrations and festivities</p>
             </div>
           </div>
         </div>
         
-        <div className="bg-white rounded-xl shadow-lg overflow-hidden animate-pulse">
-          <div className="h-80 md:h-96 bg-gray-200"></div>
+        <div className="bg-gradient-to-br from-orange-50 to-red-50 border border-orange-200 rounded-xl shadow-lg overflow-hidden animate-pulse">
+          <div className="h-80 md:h-96 bg-gradient-to-br from-orange-100 to-red-100"></div>
           <div className="p-6">
-            <div className="h-6 bg-gray-200 rounded mb-3"></div>
-            <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+            <div className="h-6 bg-orange-200 rounded mb-3"></div>
+            <div className="h-4 bg-orange-200 rounded w-3/4"></div>
           </div>
         </div>
       </section>
@@ -110,7 +113,7 @@ export default function GallerySection() {
       <section className="mb-12">
         <div className="bg-red-50 border border-red-200 rounded-xl p-8 text-center">
           <Camera className="mx-auto mb-4 text-red-500" size={48} />
-          <p className="text-red-700 text-lg mb-2">Error loading gallery</p>
+          <p className="text-red-700 text-lg mb-2">Error loading Durga Puja gallery</p>
           <p className="text-red-600 text-sm">{error}</p>
         </div>
       </section>
@@ -120,9 +123,9 @@ export default function GallerySection() {
   if (galleries.length === 0) {
     return (
       <section className="mb-12">
-        <div className="bg-gray-50 border border-gray-200 rounded-xl p-8 text-center">
-          <Camera className="mx-auto mb-4 text-gray-400" size={48} />
-          <p className="text-gray-600 text-lg">No gallery items available at the moment.</p>
+        <div className="bg-orange-50 border border-orange-200 rounded-xl p-8 text-center">
+          <Camera className="mx-auto mb-4 text-orange-400" size={48} />
+          <p className="text-orange-700 text-lg">No Durga Puja gallery items available at the moment.</p>
         </div>
       </section>
     );
@@ -136,22 +139,28 @@ export default function GallerySection() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-3">
-          <div className="w-1 h-8 bg-gradient-to-b from-purple-500 to-purple-700 rounded-full"></div>
+          <div className="w-1 h-8 bg-gradient-to-b from-orange-500 to-red-600 rounded-full"></div>
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">Photo Gallery</h2>
-            <p className="text-gray-600 text-sm">Visual stories from Northeast</p>
+            <h2 className="text-2xl font-bold text-gray-900 flex items-center space-x-2">
+              <span>Durga Puja Gallery 2025</span>
+              <Sparkles className="text-orange-500" size={24} />
+            </h2>
+            <p className="text-gray-600 text-sm">Divine celebrations and festivities</p>
           </div>
         </div>
-        <div className="hidden sm:flex items-center space-x-2 text-sm text-gray-500">
+        <div className="hidden sm:flex items-center space-x-2 text-sm text-orange-600">
           <Eye size={16} />
           <span>{galleries.length} galleries</span>
         </div>
       </div>
 
       {/* Gallery Slider */}
-      <div className="relative bg-white rounded-xl shadow-lg overflow-hidden">
+      <div className="relative bg-gradient-to-br from-orange-50 to-red-50 border border-orange-200 rounded-xl shadow-lg overflow-hidden">
+        {/* Decorative Elements */}
+        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-orange-400 via-red-500 to-orange-400"></div>
+        
         {/* Main Image */}
-        <div className="relative h-80 md:h-96 lg:h-[28rem] bg-gray-100 overflow-hidden">
+        <div className="relative h-80 md:h-96 lg:h-[28rem] bg-gradient-to-br from-orange-100 to-red-100 overflow-hidden">
           <Image
             src={getImageUrl(firstImage)}
             alt={currentGallery.gallery_title}
@@ -165,9 +174,15 @@ export default function GallerySection() {
           />
           
           {/* Photo Count Overlay */}
-          <div className="absolute top-4 right-4 bg-black/70 text-white px-3 py-2 rounded-full text-sm backdrop-blur-sm flex items-center space-x-2">
+          <div className="absolute top-4 right-4 bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-2 rounded-full text-sm backdrop-blur-sm flex items-center space-x-2 shadow-lg">
             <Images size={16} />
             <span>{currentGallery.gallery_path.length}</span>
+          </div>
+
+          {/* Durga Puja Badge */}
+          <div className="absolute top-4 left-4 bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-2 rounded-full text-sm backdrop-blur-sm flex items-center space-x-2 shadow-lg">
+            <Star size={16} />
+            <span>DURGA PUJA</span>
           </div>
 
           {/* Navigation Arrows */}
@@ -175,13 +190,13 @@ export default function GallerySection() {
             <>
               <button
                 onClick={prevGallery}
-                className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full backdrop-blur-sm transition-all duration-200 hover:scale-110"
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white p-3 rounded-full backdrop-blur-sm transition-all duration-200 hover:scale-110 shadow-lg"
               >
                 <ChevronLeft size={20} />
               </button>
               <button
                 onClick={nextGallery}
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full backdrop-blur-sm transition-all duration-200 hover:scale-110"
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white p-3 rounded-full backdrop-blur-sm transition-all duration-200 hover:scale-110 shadow-lg"
               >
                 <ChevronRight size={20} />
               </button>
@@ -189,19 +204,19 @@ export default function GallerySection() {
           )}
 
           {/* Gallery Counter */}
-          <div className="absolute bottom-4 left-4 bg-black/70 text-white px-3 py-2 rounded-full text-sm backdrop-blur-sm">
+          <div className="absolute bottom-4 left-4 bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-2 rounded-full text-sm backdrop-blur-sm shadow-lg">
             {currentIndex + 1} / {galleries.length}
           </div>
         </div>
 
         {/* Content */}
-        <div className="p-6">
+        <div className="p-6 bg-gradient-to-br from-orange-50 to-red-50">
           <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center space-x-2 text-sm text-gray-500">
+            <div className="flex items-center space-x-2 text-sm text-orange-600">
               <Calendar size={16} />
               <span>{format(new Date(currentGallery.update_date), 'MMM dd, yyyy')}</span>
             </div>
-            <div className="flex items-center space-x-2 text-sm text-purple-600">
+            <div className="flex items-center space-x-2 text-sm text-red-600">
               <Camera size={16} />
               <span>#{currentGallery.gallery_id}</span>
             </div>
@@ -211,7 +226,7 @@ export default function GallerySection() {
             {currentGallery.gallery_title}
           </h3>
 
-          <p className="text-gray-600 leading-relaxed mb-4 line-clamp-3">
+          <p className="text-gray-700 leading-relaxed mb-4 line-clamp-3">
             {currentGallery.gallery_description}
           </p>
 
@@ -219,8 +234,7 @@ export default function GallerySection() {
           <div className="flex items-center justify-between">
             <Link
               href={`/photo-album/${currentGallery.gallery_url}`}
-              // href={currentGallery.gallery_url || `/gallery/${currentGallery.gallery_id}`}
-              className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 shadow-md hover:shadow-lg flex items-center space-x-2 hover:scale-105"
+              className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 shadow-md hover:shadow-lg flex items-center space-x-2 hover:scale-105"
             >
               <span>View Gallery</span>
               <ExternalLink size={16} />
@@ -234,12 +248,12 @@ export default function GallerySection() {
                     key={index}
                     onClick={() => setCurrentIndex(index)}
                     className={`w-2 h-2 rounded-full transition-all duration-200 ${
-                      index === currentIndex ? 'bg-purple-600 w-6' : 'bg-gray-300 hover:bg-gray-400'
+                      index === currentIndex ? 'bg-gradient-to-r from-orange-500 to-red-500 w-6' : 'bg-orange-300 hover:bg-orange-400'
                     }`}
                   />
                 ))}
                 {galleries.length > 5 && (
-                  <span className="text-gray-400 text-sm ml-1">+{galleries.length - 5}</span>
+                  <span className="text-orange-500 text-sm ml-1">+{galleries.length - 5}</span>
                 )}
               </div>
             )}

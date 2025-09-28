@@ -173,7 +173,7 @@ export default function ExclusiveSection() {
                       src={getImageSrc(featuredArticle.post_image)}
                       alt={featuredArticle.post_name}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="object-contain"
                       sizes="(max-width: 1024px) 100vw, 40vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
@@ -219,7 +219,7 @@ export default function ExclusiveSection() {
                       src={getImageSrc(article.post_image)}
                       alt={article.post_name}
                       fill
-                      className="object-cover"
+                      className="object-contain"
                       sizes="128px"
                     />
                   </div>
@@ -259,7 +259,7 @@ export default function ExclusiveSection() {
                         src={getImageSrc(article.post_image)}
                         alt={article.post_name}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="object-contain group-hover:scale-105 transition-transform duration-300"
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     </div>
