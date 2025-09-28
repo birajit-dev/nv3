@@ -58,4 +58,5 @@ export type CategorySlug =
   | 'article' 
   | 'showbiz' 
   | 'northeast' 
-  | 'health' 
+  | 'health'
+  | 'adstender'

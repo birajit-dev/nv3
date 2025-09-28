@@ -21,14 +21,14 @@ const sampleAds: Record<string, AdConfig[]> = {
     {
       id: 'sidebar-1',
       title: 'ONGC Advertisement',
-      image: 'https://app.neherald.com/images/ongc_adssss.jpg',
+      image: 'https://app.neherald.com/images/ongc_ads.png',
       width: 300,
       height: 600,
     },
     {
       id: 'sidebar-2',
       title: 'ICFAI University',
-      image: 'https://i.ibb.co/3529h4qD/icfai-adssss.jpg',
+      image: 'https://i.ibb.co/3529h4qD/icfai-ads.png',
       width: 300,
       height: 250,
     },

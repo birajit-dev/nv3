@@ -450,6 +450,13 @@ export default function Header() {
                   >
                     Photo Album
                   </Link>
+
+                  <Link
+                    href="/adstender"
+                    className="block px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors font-medium text-sm border-b border-gray-100"
+                  >
+                    Jobs/Tenders
+                  </Link>
                 </div>
               </div>
             </div>

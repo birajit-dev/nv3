@@ -66,6 +66,13 @@ export const CATEGORIES: Record<CategorySlug, Category> = {
     description: 'Health news and updates',
     color: '#6b7280',
   },
+  'adstender': {
+    id: 'adstender',
+    name: 'Jobs/Tenders',
+    slug: 'adstender',
+    description: 'Adstender news and updates',
+    color: '#6b7280',
+  },
 };
 
 export const CATEGORY_ORDER: CategorySlug[] = [
@@ -78,6 +85,7 @@ export const CATEGORY_ORDER: CategorySlug[] = [
   'showbiz',
   'northeast',
   'health',
+  'adstender',
 
 ];
 
