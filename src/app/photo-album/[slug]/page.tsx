@@ -187,51 +187,18 @@ export default function GalleryPage({ params }: { params: Promise<{ slug: string
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [selectedImageIndex, galleryData, closeLightbox, navigateImage]);
 
-  // Helper function to get thumbnail images around current selection
-  const getThumbnailImages = () => {
-    if (!galleryData || selectedImageIndex === null) return [];
-    
-    const totalImages = galleryData.gallery.gallery_path.length;
-    const thumbnailCount = Math.min(5, totalImages); // Show max 5 thumbnails
-    const halfCount = Math.floor(thumbnailCount / 2);
-    
-    let startIndex = selectedImageIndex - halfCount;
-    let endIndex = selectedImageIndex + halfCount;
-    
-    // Adjust bounds if we're near the beginning or end
-    if (startIndex < 0) {
-      endIndex = Math.min(thumbnailCount - 1, totalImages - 1);
-      startIndex = 0;
-    } else if (endIndex >= totalImages) {
-      startIndex = Math.max(0, totalImages - thumbnailCount);
-      endIndex = totalImages - 1;
-    }
-    
-    const thumbnails = [];
-    for (let i = startIndex; i <= endIndex; i++) {
-      thumbnails.push({
-        index: i,
-        path: galleryData.gallery.gallery_path[i]
-      });
-    }
-    
-    return thumbnails;
-  };
-
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="min-h-screen bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
           <div className="animate-pulse">
-            <div className="h-6 bg-gray-300 rounded w-96 mb-6"></div>
-            <div className="h-8 bg-gray-300 rounded w-64 mb-8"></div>
-            <div className="h-6 bg-gray-300 rounded w-96 mb-4"></div>
-            <div className="h-4 bg-gray-300 rounded w-48 mb-8"></div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="bg-white rounded-lg shadow-md overflow-hidden">
-                  <div className="h-64 bg-gray-300"></div>
-                </div>
+            <div className="h-4 sm:h-6 bg-gray-200 rounded w-full max-w-xs sm:max-w-sm mb-4 sm:mb-6"></div>
+            <div className="h-6 sm:h-8 bg-gray-200 rounded w-full max-w-sm sm:max-w-md mb-6 sm:mb-8"></div>
+            <div className="h-4 sm:h-6 bg-gray-200 rounded w-full max-w-xs sm:max-w-sm mb-3 sm:mb-4"></div>
+            <div className="h-3 sm:h-4 bg-gray-200 rounded w-full max-w-xs mb-6 sm:mb-8"></div>
+            <div className="space-y-4 sm:space-y-6">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="bg-gray-100 rounded h-48 sm:h-64"></div>
               ))}
             </div>
           </div>
@@ -242,15 +209,15 @@ export default function GalleryPage({ params }: { params: Promise<{ slug: string
 
   if (!galleryData) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Gallery Not Found</h1>
-          <p className="text-gray-600 mb-6">The requested photo gallery could not be found.</p>
+      <div className="min-h-screen bg-white flex items-center justify-center px-4">
+        <div className="text-center max-w-md">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Gallery Not Found</h1>
+          <p className="text-gray-600 mb-6 text-sm sm:text-base">The requested photo gallery could not be found.</p>
           <Link 
             href="/photo-album"
-            className="inline-flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center space-x-2 bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded hover:bg-blue-700 transition-colors text-sm sm:text-base"
           >
-            <ArrowLeft size={20} />
+            <ArrowLeft size={16} className="sm:w-5 sm:h-5" />
             <span>Back to Photo Albums</span>
           </Link>
         </div>
@@ -262,20 +229,21 @@ export default function GalleryPage({ params }: { params: Promise<{ slug: string
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="min-h-screen bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
           {/* Breadcrumb */}
-          <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-6">
-            <Link href="/" className="flex items-center space-x-1 hover:text-blue-600 transition-colors">
-              <Home size={16} />
-              <span>Home</span>
+          <nav className="flex items-center space-x-1 sm:space-x-2 md:space-x-3 text-xs sm:text-sm md:text-base text-gray-600 mb-4 sm:mb-6 md:mb-8 overflow-x-auto scrollbar-hide">
+            <Link href="/" className="flex items-center space-x-1 hover:text-blue-600 transition-colors whitespace-nowrap flex-shrink-0">
+              <Home size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5" />
+              <span className="hidden xs:inline">Home</span>
             </Link>
-            <ChevronRight size={14} className="text-gray-400" />
-            <Link href="/photo-album" className="hover:text-blue-600 transition-colors">
-              Photo Albums
+            <ChevronRight size={12} className="text-gray-400 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 flex-shrink-0" />
+            <Link href="/photo-album" className="hover:text-blue-600 transition-colors whitespace-nowrap flex-shrink-0">
+              <span className="hidden sm:inline">Photo Albums</span>
+              <span className="sm:hidden">Albums</span>
             </Link>
-            <ChevronRight size={14} className="text-gray-400" />
-            <span className="text-gray-900 font-medium truncate max-w-xs">
+            <ChevronRight size={12} className="text-gray-400 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 flex-shrink-0" />
+            <span className="text-gray-900 font-medium truncate max-w-[120px] sm:max-w-[200px] md:max-w-none" title={gallery.gallery_title}>
               {gallery.gallery_title}
             </span>
           </nav>
@@ -283,100 +251,109 @@ export default function GalleryPage({ params }: { params: Promise<{ slug: string
           {/* Back Button */}
           <Link 
             href="/photo-album"
-            className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-800 mb-6 transition-colors"
+            className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-800 mb-4 sm:mb-6 transition-colors text-sm sm:text-base"
           >
-            <ArrowLeft size={20} />
+            <ArrowLeft size={16} className="sm:w-5 sm:h-5" />
             <span>Back to Photo Albums</span>
           </Link>
 
           {/* Gallery Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">
+          <div className="mb-6 sm:mb-8 pb-4 sm:pb-6 border-b border-gray-200">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4 leading-tight">
               {gallery.gallery_title}
             </h1>
             
-            <p className="text-gray-600 text-lg mb-4">
+            <p className="text-gray-700 text-base sm:text-lg mb-3 sm:mb-4 leading-relaxed">
               {gallery.gallery_description}
             </p>
 
-            <div className="flex items-center space-x-4 text-sm text-gray-500">
+            <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 text-xs sm:text-sm text-gray-500">
               <div className="flex items-center space-x-1">
-                <Calendar size={16} />
+                <Calendar size={14} className="sm:w-4 sm:h-4" />
                 <time dateTime={gallery.update_date}>
                   {format(new Date(gallery.update_date), 'MMM dd, yyyy')}
                 </time>
               </div>
-              <span>•</span>
+              <span className="hidden sm:inline">•</span>
               <span>{gallery.gallery_path.length} photos</span>
             </div>
           </div>
 
-          {/* Compact Photo Grid */}
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-2">
+          {/* Simple Photo List */}
+          <div className="space-y-6 sm:space-y-8">
             {gallery.gallery_path.map((imagePath, index) => {
               const imageUrl = `${API_BASE_URL}/uploads/gallery/${encodeURIComponent(imagePath)}`;
-              console.log(`Image ${index + 1} URL:`, imageUrl);
               
               return (
-                <div key={index} className="bg-white rounded-md shadow-sm overflow-hidden group">
-                  {/* Image */}
-                  <div className="relative aspect-square overflow-hidden bg-gray-100">
-                    <img
-                      src={imageUrl}
-                      alt={`Photo ${index + 1}`}
-                      className="w-full h-full object-cover cursor-pointer group-hover:scale-105 transition-transform duration-300"
-                      onClick={() => openLightbox(index)}
-                      onLoad={() => console.log(`Image ${index + 1} loaded successfully`)}
-                      onError={() => console.error(`Image ${index + 1} failed to load:`, imageUrl)}
-                    />
-                    
-                    {/* Overlay */}
-                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
-                      <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 flex space-x-1">
+                <div key={index} className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                  {/* Image Header */}
+                  <div className="px-4 sm:px-6 py-3 sm:py-4 bg-gray-50 border-b border-gray-200">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-base sm:text-lg font-semibold text-gray-900">
+                        Photo {index + 1}
+                      </h3>
+                      <div className="flex items-center space-x-1 sm:space-x-2">
                         <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            downloadImage(imagePath, `${gallery.gallery_title}-${index + 1}.jpg`);
-                          }}
-                          className="bg-white/90 text-gray-700 p-1 rounded-full hover:bg-white hover:scale-110 transition-all duration-200"
+                          onClick={() => downloadImage(imagePath, `${gallery.gallery_title}-${index + 1}.jpg`)}
+                          className="text-gray-600 hover:text-blue-600 transition-colors p-1"
                           title="Download"
                         >
-                          <Download size={10} />
+                          <Download size={16} className="sm:w-4.5 sm:h-4.5" />
                         </button>
                         <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            toggleFavorite(index);
-                          }}
-                          className={`p-1 rounded-full hover:scale-110 transition-all duration-200 ${
+                          onClick={() => toggleFavorite(index)}
+                          className={`transition-colors p-1 ${
                             favorites.has(index) 
-                              ? 'bg-red-500 text-white' 
-                              : 'bg-white/90 text-gray-700 hover:bg-white'
+                              ? 'text-red-500' 
+                              : 'text-gray-600 hover:text-red-500'
                           }`}
                           title={favorites.has(index) ? 'Remove from favorites' : 'Add to favorites'}
                         >
-                          <Heart size={10} className={favorites.has(index) ? 'fill-current' : ''} />
+                          <Heart size={16} className={`sm:w-4.5 sm:h-4.5 ${favorites.has(index) ? 'fill-current' : ''}`} />
+                        </button>
+                        <button
+                          onClick={() => openLightbox(index)}
+                          className="text-gray-600 hover:text-blue-600 transition-colors p-1"
+                          title="View full size"
+                        >
+                          <ZoomIn size={16} className="sm:w-4.5 sm:h-4.5" />
                         </button>
                       </div>
                     </div>
-                    
-                    {/* Image number */}
-                    <div className="absolute top-1 left-1 bg-black/60 text-white text-xs px-1 py-0.5 rounded-full">
-                      {index + 1}
-                    </div>
-                    
-                    {/* Favorite badge */}
-                    {favorites.has(index) && (
-                      <div className="absolute top-1 right-1 bg-red-500 text-white p-0.5 rounded-full">
-                        <Heart size={8} className="fill-current" />
-                      </div>
-                    )}
                   </div>
                   
-                  {/* Image info */}
-                  <div className="p-1">
-                    <p className="text-xs text-gray-600 truncate" title={imagePath}>
-                      {index + 1}
+                  {/* Image */}
+                  <div className="p-3 sm:p-6">
+                    <div className="relative bg-gray-100 rounded-lg overflow-hidden">
+                      <img
+                        src={imageUrl}
+                        alt={`Photo ${index + 1} from ${gallery.gallery_title}`}
+                        className="w-full h-auto cursor-pointer hover:opacity-90 transition-opacity"
+                        onClick={() => openLightbox(index)}
+                        loading="lazy"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const parent = target.parentElement;
+                          if (parent) {
+                            parent.innerHTML = `
+                              <div class="flex items-center justify-center h-48 sm:h-64 bg-gray-100 text-gray-500">
+                                <div class="text-center px-4">
+                                  <p class="text-sm">Image not available</p>
+                                  <p class="text-xs mt-1 break-all">${imagePath}</p>
+                                </div>
+                              </div>
+                            `;
+                          }
+                        }}
+                      />
+                    </div>
+                  </div>
+                  
+                  {/* Image Info */}
+                  <div className="px-4 sm:px-6 pb-3 sm:pb-4">
+                    <p className="text-xs sm:text-sm text-gray-600 break-all">
+                      File: {imagePath}
                     </p>
                   </div>
                 </div>
@@ -386,26 +363,26 @@ export default function GalleryPage({ params }: { params: Promise<{ slug: string
         </div>
       </div>
 
-      {/* Simple Modal */}
+      {/* Responsive Modal */}
       {isModalOpen && selectedImageIndex !== null && (
         <div 
-          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-2 sm:p-4"
           onClick={closeLightbox}
         >
-          <div className="relative max-w-4xl max-h-full" onClick={(e) => e.stopPropagation()}>
+          <div className="relative w-full h-full max-w-4xl max-h-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
             {/* Close button */}
             <button
               onClick={closeLightbox}
-              className="absolute top-4 right-4 z-10 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+              className="absolute top-2 sm:top-4 right-2 sm:right-4 z-10 bg-black bg-opacity-50 text-white p-2 sm:p-2 rounded hover:bg-opacity-70 transition-colors"
             >
-              <X size={24} />
+              <X size={20} className="sm:w-6 sm:h-6" />
             </button>
             
             {/* Image */}
             <img
               src={`${API_BASE_URL}/uploads/gallery/${encodeURIComponent(gallery.gallery_path[selectedImageIndex])}`}
               alt={`Photo ${selectedImageIndex + 1}`}
-              className="max-w-full max-h-[90vh] object-contain"
+              className="max-w-full max-h-full object-contain"
             />
             
             {/* Navigation */}
@@ -413,47 +390,22 @@ export default function GalleryPage({ params }: { params: Promise<{ slug: string
               <>
                 <button
                   onClick={() => navigateImage('prev')}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-colors"
+                  className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 sm:p-3 rounded hover:bg-opacity-70 transition-colors"
                 >
-                  <ChevronLeft size={24} />
+                  <ChevronLeft size={20} className="sm:w-6 sm:h-6" />
                 </button>
                 <button
                   onClick={() => navigateImage('next')}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-colors"
+                  className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 sm:p-3 rounded hover:bg-opacity-70 transition-colors"
                 >
-                  <ChevronRight size={24} />
+                  <ChevronRight size={20} className="sm:w-6 sm:h-6" />
                 </button>
               </>
             )}
             
             {/* Image counter */}
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full">
+            <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white px-3 sm:px-4 py-1 sm:py-2 rounded text-sm sm:text-base">
               {selectedImageIndex + 1} / {gallery.gallery_path.length}
-            </div>
-            
-            {/* Actions */}
-            <div className="absolute bottom-4 right-4 flex space-x-2">
-              <button
-                onClick={() => downloadImage(
-                  gallery.gallery_path[selectedImageIndex], 
-                  `${gallery.gallery_title}-${selectedImageIndex + 1}.jpg`
-                )}
-                className="bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
-                title="Download"
-              >
-                <Download size={20} />
-              </button>
-              <button
-                onClick={() => toggleFavorite(selectedImageIndex)}
-                className={`p-2 rounded-full transition-colors ${
-                  favorites.has(selectedImageIndex) 
-                    ? 'bg-red-500 text-white' 
-                    : 'bg-black/50 text-white hover:bg-black/70'
-                }`}
-                title={favorites.has(selectedImageIndex) ? 'Remove from favorites' : 'Add to favorites'}
-              >
-                <Heart size={20} className={favorites.has(selectedImageIndex) ? 'fill-current' : ''} />
-              </button>
             </div>
           </div>
         </div>

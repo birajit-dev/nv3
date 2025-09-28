@@ -220,21 +220,22 @@ export default function Header() {
                   </button>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <a href="#" className="text-gray-300 hover:text-blue-400 transition-colors" aria-label="Facebook">
+                  <a href="https://www.facebook.com/neherald/" className="text-gray-300 hover:text-blue-400 transition-colors" aria-label="Facebook">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                     </svg>
                   </a>
-                  <a href="#" className="text-gray-300 hover:text-sky-400 transition-colors" aria-label="Twitter">
+                  <a href="https://x.com/HeraldNortheast" className="text-gray-300 hover:text-sky-400 transition-colors" aria-label="Twitter">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
                     </svg>
                   </a>
-                  <a href="#" className="text-gray-300 hover:text-red-400 transition-colors" aria-label="YouTube">
+                  <a href="https://www.youtube.com/@northeastherald5966" className="text-gray-300 hover:text-red-400 transition-colors" aria-label="YouTube">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                     </svg>
                   </a>
+                  
                 </div>
               </div>
             </div>
@@ -243,36 +244,28 @@ export default function Header() {
       </header>
 
       {/* Header with Logo and Navigation - Sticky on mobile, static on desktop */}
-      <div className="bg-white border-b border-gray-100 sticky top-0 z-50 lg:static">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-24">
+      <div className="bg-white border-b border-gray-100 sticky top-0 z-50 lg:static w-full h-full">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full">
+          <div className="flex items-center justify-between h-32 lg:h-40 w-full">
             {/* Left spacer for desktop */}
-            <div className="hidden lg:flex flex-1"></div>
+            <div className="hidden lg:flex flex-1 h-full"></div>
 
             {/* Logo - centered on desktop, left on mobile */}
-            <div className="flex items-center lg:flex-1 lg:justify-center">
-              <Link href="/" className="flex items-center">
-                {/* <Image
+            <div className="flex items-center lg:flex-1 lg:justify-center w-full h-full">
+              <Link href="/" className="flex items-center w-full h-full">
+                <Image
                   src="/images/neherald_logo.png"
                   alt="Northeast Herald Logo"
-                  width={200}
-                  height={100}
-                  className="h-auto w-auto mr-3 lg:w-[400px] lg:h-[87px]"
+                  width={800}
+                  height={700}
+                  className="h-full w-full mr-3 lg:w-full lg:h-full object-contain"
                   priority
-                /> */}
-                <Image
-                src="/images/neherald_logo.png"
-                alt="Northeast Herald Logo"
-                width={0}
-                height={0}
-                sizes="100vw"
-                style={{ width: '100%', height: 'auto' }}
                 />
               </Link>
             </div>
 
             {/* Right side actions */}
-            <div className="flex items-center space-x-3 lg:flex-1 lg:justify-end">
+            <div className="flex items-center space-x-3 lg:flex-1 lg:justify-end h-full">
               <Link
                 href="/search"
                 className="p-2 text-gray-600 hover:text-red-600 transition-colors rounded-lg hover:bg-gray-50"
