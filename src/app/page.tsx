@@ -2,7 +2,7 @@ import AdBanner from '@/components/ui/AdBanner';
 import TripuraSection from '@/components/categories/TripuraSection';
 import NationalSection from '@/components/categories/NationalSection';
 import SportsSection from '@/components/categories/SportsSection';
-import InternationalSection from '@/components/categories/InternationalSection';
+import WorldSection from '@/components/categories/InternationalSection';
 import FinanceSection from '@/components/categories/FinanceSection';
 import EntertainmentSection from '@/components/categories/EntertainmentSection';
 import VideosSection from '@/components/categories/VideosSection';
@@ -16,7 +16,6 @@ import HomepageOptimizer from '@/components/seo/HomepageOptimizer';
 import { generateHomepageSchema } from '@/components/seo/HomepageOptimizer';
 import LazySection, { CriticalSection } from '@/components/performance/LazySection';
 import OptimizedImage from '@/components/performance/OptimizedImage';
-import DurgaPujaSection from '@/components/categories/DurgaPujaSection';
 import { TrendingUp } from 'lucide-react';
 
 export default function Home() {
@@ -68,9 +67,7 @@ export default function Home() {
               <LazySection>
                 <NortheastSection />
               </LazySection>
-              <LazySection>
-                <DurgaPujaSection />
-              </LazySection>
+              
 
               <LazySection>
                 <GallerySection />
@@ -92,9 +89,9 @@ export default function Home() {
                 </div>
               </LazySection>
 
-              {/* International Section */}
+              {/* World Section */}
               <LazySection>
-                <InternationalSection />
+                <WorldSection />
               </LazySection>
 
               {/* Finance Section */}
@@ -135,8 +132,8 @@ export default function Home() {
                     <div className="text-xs text-gray-400 mb-1 p-2">Advertisement</div>
                     <div className="relative w-full h-full">
                       <OptimizedImage
-                        src="https://i.ibb.co/F4t7r5r7/Screenshot-2025-07-17-at-10-19-08-PM.png"
-                        alt="ICFAI Advertisement"
+                        src="/images/ads/smart-meter.avif"
+                        alt="Smart Meter Advertisement"
                         width={300}
                         height={250}
                         className="w-full h-full object-cover"
@@ -151,7 +148,7 @@ export default function Home() {
                     <div className="text-xs text-gray-400 mb-1 p-2">Advertisement</div>
                     <div className="relative w-full h-full">
                       <OptimizedImage
-                        src="https://i.ibb.co/3529h4qD/icfai-ads.jpg"
+                        src="/images/ads/icfai.avif"
                         alt="ICFAI Advertisement"
                         width={300}
                         height={250}
@@ -166,7 +163,7 @@ export default function Home() {
                     <div className="text-xs text-gray-400 mb-1 p-2">Advertisement</div>
                     <div className="relative w-full h-full">
                       <OptimizedImage
-                        src="https://i.ibb.co/mCYsgRH2/new-ads-shyam.jpg"
+                        src="/images/ads/shyam.avif"
                         alt="Shyam Advertisement"
                         width={300}
                         height={250}
@@ -181,7 +178,7 @@ export default function Home() {
                     <div className="text-xs text-gray-400 mb-1 p-2">Advertisement</div>
                     <div className="relative w-full h-full">
                       <OptimizedImage
-                        src="https://app.neherald.com/images/longtrai-ads.png"
+                        src="/images/ads/longtrai-ads.avif"
                         alt="Longtrai Advertisement"
                         width={300}
                         height={250}

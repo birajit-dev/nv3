@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { format } from 'date-fns';
 import { User, Eye, Calendar, ChevronRight, ChevronLeft, Home } from 'lucide-react';
+import { getCategorySlug } from '@/lib/categories';
 import { NewsArticle } from '@/types/news';
 import { generateSEOMetadata } from '@/lib/seo';
 import AdBanner from '@/components/ui/AdBanner';
@@ -192,7 +193,7 @@ export default async function TripuraTopNewsPage({ searchParams }: PageProps) {
             {topheadlines.map((article, index) => (
               <Link
                 key={article._id}
-                href={`/${article.post_category || 'tripura'}/${article.post_url}`}
+                href={`/${getCategorySlug(article.post_category || 'tripura')}/${article.post_url}`}
                 className="group block bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden border border-gray-200 h-full flex flex-col"
               >
                 <article className="h-full flex flex-col">

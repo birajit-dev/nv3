@@ -21,18 +21,28 @@ interface InternationalArticle {
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://app.neherald.com/api/next/v1';
 
-async function fetchInternationalNews(): Promise<InternationalArticle[]> {
+async function fetchWorldNews(): Promise<InternationalArticle[]> {
   try {
+    // API endpoint is still 'international' but we treat it as world news
     const response = await fetch(`${API_BASE_URL}/international`);
 
     if (!response.ok) {
-      throw new Error('Failed to fetch international news');
+      throw new Error('Failed to fetch world news');
     }
 
     const data = await response.json();
-    return data.data?.internationalnews || [];
+    console.log('World news API response:', data); // Debug log
+    
+    // Try multiple possible response structures
+    return data.data?.internationalnews || 
+           data.data?.worldnews || 
+           data.internationalnews ||
+           data.worldnews ||
+           data.data || 
+           data.articles || 
+           [];
   } catch (error) {
-    console.error('Failed to fetch international news:', error);
+    console.error('Failed to fetch world news:', error);
     return [];
   }
 }
@@ -52,24 +62,24 @@ function getImageUrl(imageUrl: string): string {
   return `https://app.neherald.com${cleanUrl}`;
 }
 
-export default function InternationalSection() {
+export default function WorldSection() {
   const [articles, setArticles] = useState<InternationalArticle[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadInternationalNews = async () => {
+    const loadWorldNews = async () => {
       try {
         setLoading(true);
-        const internationalNews = await fetchInternationalNews();
-        setArticles(internationalNews.slice(0, 8));
+        const worldNews = await fetchWorldNews();
+        setArticles(worldNews.slice(0, 8));
       } catch (error) {
-        console.error('Failed to load international news:', error);
+        console.error('Failed to load world news:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    loadInternationalNews();
+    loadWorldNews();
   }, []);
 
   if (loading) {
@@ -123,10 +133,10 @@ export default function InternationalSection() {
       <div className="flex items-center justify-between mb-6 pb-3 border-b-2 border-blue-600">
         <div className="flex items-center space-x-3">
           <Globe className="text-blue-600" size={32} />
-          <h2 className="text-3xl font-bold text-gray-900">International</h2>
+          <h2 className="text-3xl font-bold text-gray-900">World</h2>
         </div>
         <Link 
-          href="/international" 
+          href="/world" 
           className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-semibold transition-colors duration-200"
         >
           <span>View All</span>
@@ -136,8 +146,8 @@ export default function InternationalSection() {
 
       {/* Grid Layout - 4 articles in 2x2 grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        {gridArticles.map((article, index) => (
-          <Link key={article._id} href={`/international/${article.post_url}`} className="block group">
+        {gridArticles.map((article, index) => (       
+          <Link key={article._id} href={`/world/${article.post_url}`} className="block group">
             <div className="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300 border border-blue-100 hover:border-blue-300 h-full">
               <div className="flex items-start space-x-3">
                 <div className="flex-shrink-0">
@@ -179,12 +189,12 @@ export default function InternationalSection() {
         <div className="bg-gradient-to-r from-blue-50 via-white to-blue-50 rounded-2xl p-6 border border-blue-100">
           <div className="flex items-center space-x-3 mb-6">
             <MapPin className="text-blue-600" size={24} />
-            <h3 className="text-xl font-bold text-gray-900">More International News</h3>
+            <h3 className="text-xl font-bold text-gray-900">More World News</h3>
             <div className="flex-1 h-px bg-gradient-to-r from-blue-200 to-transparent"></div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {listArticles.map((article, index) => (
-              <Link key={article._id} href={`/international/${article.post_url}`} className="block group">
+              <Link key={article._id} href={`/world/${article.post_url}`} className="block group">
                 <div className="flex items-center space-x-4 p-4 bg-white rounded-lg hover:bg-blue-50 transition-all duration-300 border border-transparent hover:border-blue-200">
                   <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
                     {index + 5}

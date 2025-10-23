@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getCategorySlug } from '@/lib/categories';
 
 interface Article {
   _id: string;
@@ -100,7 +101,7 @@ export async function GET(request: NextRequest) {
     }
     
     const rssItems = articles.map(article => {
-      const articleUrl = `${baseUrl}/${encodeURIComponent(article.post_category)}/${encodeURIComponent(article.post_url)}`;
+      const articleUrl = `${baseUrl}/${encodeURIComponent(getCategorySlug(article.post_category))}/${encodeURIComponent(article.post_url)}`;
       const pubDate = new Date(article.update_date).toUTCString();
       const cleanContent = stripHtmlTags(article.post_content);
       

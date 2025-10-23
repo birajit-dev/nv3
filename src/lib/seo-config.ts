@@ -43,7 +43,7 @@ export const SEO_CONFIG = {
       'Bangalore news', 'Chennai news', 'Kolkata news', 'Hyderabad news',
       'Indian government', 'Parliament news', 'Election news', 'Indian politics'
     ],
-    international: [
+    world: [
       'World news', 'International politics', 'Global news', 'Foreign affairs',
       'International relations', 'World economy', 'Global politics'
     ],

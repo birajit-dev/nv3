@@ -16,10 +16,10 @@ export const CATEGORIES: Record<CategorySlug, Category> = {
     description: 'National news from across India',
     color: '#2563eb',
   },
-  'international': {
-    id: 'international',
-    name: 'International',
-    slug: 'international',
+  'world': {
+    id: 'world',
+    name: 'World',
+    slug: 'world',
     description: 'Global news and world events',
     color: '#7c3aed',
   },
@@ -78,7 +78,7 @@ export const CATEGORIES: Record<CategorySlug, Category> = {
 export const CATEGORY_ORDER: CategorySlug[] = [
   'tripura',
   'national',
-  'international',
+  'world',
   'sports',
   'finance',
   'article',
@@ -88,6 +88,28 @@ export const CATEGORY_ORDER: CategorySlug[] = [
   'adstender',
 
 ];
+
+// Map old category names to new ones for backward compatibility
+export const CATEGORY_MAPPING: Record<string, CategorySlug> = {
+  'international': 'world',
+  // Add other mappings if needed in the future
+};
+
+// Helper function to get the correct category slug
+export function getCategorySlug(category: string): CategorySlug {
+  const mappedCategory = CATEGORY_MAPPING[category];
+  if (mappedCategory) {
+    return mappedCategory;
+  }
+  
+  // Check if it's a valid CategorySlug
+  if (Object.keys(CATEGORIES).includes(category as CategorySlug)) {
+    return category as CategorySlug;
+  }
+  
+  // Default fallback
+  return 'article';
+}
 
 export function getCategoryBySlug(slug: string): Category | undefined {
   return CATEGORIES[slug as CategorySlug];

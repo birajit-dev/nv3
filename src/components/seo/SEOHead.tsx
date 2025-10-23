@@ -45,7 +45,7 @@ export default function SEOHead({
     const categoryKeywords = {
       tripura: ['Tripura government', 'Tripura CM', 'Tripura assembly', 'Agartala politics'],
       national: ['India news', 'National politics', 'Delhi news', 'Indian government'],
-      international: ['World news', 'International politics', 'Global news'],
+      world: ['World news', 'International politics', 'Global news'],
       sports: ['Sports news', 'Cricket news', 'Football news', 'Tripura sports'],
       finance: ['Business news', 'Finance news', 'Economic news', 'Tripura economy']
     };

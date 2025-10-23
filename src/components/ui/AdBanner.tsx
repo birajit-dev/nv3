@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 
 interface AdBannerProps {
   type: 'sidebar' | 'horizontal' | 'square' | 'mobile';
@@ -16,19 +15,26 @@ interface AdConfig {
   height: number;
 }
 
+// Validate image paths exist
+const validateImagePath = (path: string): boolean => {
+  // In a real app, you might want to check if the file exists
+  // For now, we'll just ensure the path is properly formatted
+  return path.startsWith('/') && path.includes('.');
+};
+
 const sampleAds: Record<string, AdConfig[]> = {
   sidebar: [
     {
       id: 'sidebar-1',
       title: 'ONGC Advertisement',
-      image: 'https://app.neherald.com/images/ongc_ads.png',
+      image: '/images/ads/ongc_ads.avif',
       width: 300,
       height: 600,
     },
     {
       id: 'sidebar-2',
       title: 'ICFAI University',
-      image: 'https://i.ibb.co/3529h4qD/icfai-ads.png',
+      image: '/images/ads/icfai.avif',
       width: 300,
       height: 250,
     },
@@ -37,7 +43,7 @@ const sampleAds: Record<string, AdConfig[]> = {
     {
       id: 'horizontal-1',
       title: 'Banking Services',
-      image: '#',
+      image: '/images/ads/shyam.avif',
       width: 728,
       height: 90,
     },
@@ -46,7 +52,7 @@ const sampleAds: Record<string, AdConfig[]> = {
     {
       id: 'square-1',
       title: 'Education Services',
-      image: '#',
+      image: '/images/ads/smart-meter.avif',
       width: 300,
       height: 300,
     },
@@ -55,7 +61,7 @@ const sampleAds: Record<string, AdConfig[]> = {
     {
       id: 'mobile-1',
       title: 'Mobile App',
-      image: '#',
+      image: '/images/ads/smart-meter.avif',
       width: 320,
       height: 100,
     },
@@ -64,12 +70,21 @@ const sampleAds: Record<string, AdConfig[]> = {
 
 export default function AdBanner({ type, className = '' }: AdBannerProps) {
   const [currentAd, setCurrentAd] = useState<AdConfig | null>(null);
+  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
     const ads = sampleAds[type] || [];
     if (ads.length > 0) {
-      const randomIndex = Math.floor(Math.random() * ads.length);
-      setCurrentAd(ads[randomIndex]);
+      // Filter ads with valid image paths
+      const validAds = ads.filter(ad => validateImagePath(ad.image));
+      if (validAds.length > 0) {
+        const randomIndex = Math.floor(Math.random() * validAds.length);
+        setCurrentAd(validAds[randomIndex]);
+        setImageError(false);
+      } else {
+        console.warn(`No valid ads found for type: ${type}`);
+        setCurrentAd(null);
+      }
     }
   }, [type]);
 
@@ -77,17 +92,40 @@ export default function AdBanner({ type, className = '' }: AdBannerProps) {
     return null;
   }
 
+  if (imageError) {
+    return (
+      <div className={`${className}`}>
+        <div className="text-xs text-gray-400 mb-1">Advertisement</div>
+        <div className="border border-gray-200 rounded overflow-hidden bg-gray-100 p-4 text-center">
+          <p className="text-sm text-gray-500">Ad content unavailable</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={`${className}`}>
       <div className="text-xs text-gray-400 mb-1">Advertisement</div>
       <div className="border border-gray-200 rounded overflow-hidden bg-white">
-        <div className="relative" style={{ width: currentAd.width, height: currentAd.height, maxWidth: '100%' }}>
-          <Image
+        <div 
+          className="relative" 
+          style={{
+            width: '100%',
+            maxWidth: currentAd.width,
+            aspectRatio: `${currentAd.width}/${currentAd.height}`,
+          }}
+        >
+          <img
             src={currentAd.image}
             alt={currentAd.title}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 300px"
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              console.error(`Failed to load image: ${currentAd.image}`, e);
+              setImageError(true);
+            }}
+            onLoad={() => {
+              console.log(`Successfully loaded image: ${currentAd.image}`);
+            }}
           />
         </div>
       </div>

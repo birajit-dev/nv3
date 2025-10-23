@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { format } from 'date-fns';
-import { getCategoryBySlug } from '@/lib/categories';
+import { getCategoryBySlug, getCategorySlug } from '@/lib/categories';
 import { generateSEOMetadata, generateNewsArticleJsonLd, generateBreadcrumbJsonLd } from '@/lib/seo';
 import AdBanner from '@/components/ui/AdBanner';
 import { Clock, User, Share2, Calendar, Tag, ChevronRight, Mail } from 'lucide-react';
@@ -410,7 +410,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                   <h2 className="text-xl font-bold text-gray-900 mb-6 border-b border-gray-200 pb-2">Related Articles</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {relatedNews.slice(0, 4).map((relatedArticle) => (
-                      <Link key={relatedArticle._id} href={`/${relatedArticle.post_category}/${relatedArticle.post_url}`} className="group block">
+                      <Link key={relatedArticle._id} href={`/${getCategorySlug(relatedArticle.post_category || 'article')}/${relatedArticle.post_url}`} className="group block">
                         <article className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
                           <div className="relative h-40">
                             <Image
@@ -454,7 +454,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                   <h3 className="text-lg font-bold text-gray-900 mb-4 border-b border-gray-200 pb-2">Latest News</h3>
                   <div className="space-y-4">
                     {latestNews.slice(0, 5).map((latestArticle) => (
-                      <Link key={latestArticle._id} href={`/${latestArticle.post_category}/${latestArticle.post_url}`} className="group block">
+                      <Link key={latestArticle._id} href={`/${getCategorySlug(latestArticle.post_category || 'article')}/${latestArticle.post_url}`} className="group block">
                         <article className="flex space-x-3 pb-4 border-b border-gray-100 last:border-b-0 last:pb-0">
                           <div className="relative w-20 h-16 flex-shrink-0 overflow-hidden rounded">
                             <Image

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { format } from 'date-fns';
 import { TrendingUp, ChevronRight, Eye, Share2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { getCategorySlug } from '@/lib/categories';
 
 interface TopNewsArticle {
   _id: string;
@@ -192,7 +193,7 @@ export default function TopNew() {
               <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wide">LATEST NEWS</h3>
             </div>
             {latestArticles.map((article, index) => (
-              <Link key={article._id} href={`/${article.post_category}/${article.post_url}`} className="group block">
+              <Link key={article._id} href={`/${getCategorySlug(article.post_category)}/${article.post_url}`} className="group block">
                 <div className="bg-white border-b border-gray-200 p-3 hover:bg-gray-50 transition-colors duration-200">
                   <div className="flex space-x-3">
                     <div className="relative w-16 h-16 flex-shrink-0 overflow-hidden">

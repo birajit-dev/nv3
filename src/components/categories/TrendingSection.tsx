@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { format } from 'date-fns';
 import { TrendingUp, Clock, Eye } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { getCategorySlug } from '@/lib/categories';
 
 interface TrendingArticle {
   _id: string;
@@ -81,7 +82,7 @@ export default function TrendingSection() {
         {trendingNews.map((article, index) => (
           <Link
             key={article._id}
-            href={`/${article.post_category || 'news'}/${article.post_url}`}
+            href={`/${getCategorySlug(article.post_category || 'news')}/${article.post_url}`}
             className="group block hover:bg-gray-50 p-3 rounded-lg transition-colors duration-200"
           >
             <article className="flex items-start space-x-3">

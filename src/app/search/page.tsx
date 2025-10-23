@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Search, User, Tag, ChevronLeft, ChevronRight, Loader2, Clock, Eye } from 'lucide-react';
+import { getCategorySlug } from '@/lib/categories';
 
 interface SearchResult {
   _id: string;
@@ -279,7 +280,7 @@ function SearchPageContent() {
                       <div className="flex gap-6">
                         {/* Article Image */}
                         <div className="flex-shrink-0">
-                          <Link href={`/${result.post_category}/${result.post_url}`}>
+                          <Link href={`/${getCategorySlug(result.post_category)}/${result.post_url}`}>
                             <div className="relative w-40 h-28 bg-gray-100 rounded-lg overflow-hidden group">
                               {result.post_image ? (
                                 <Image

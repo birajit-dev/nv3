@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { format } from 'date-fns';
 import { Star, Film, Music, Tv, Camera, ExternalLink, Sparkles, Award } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { getCategorySlug } from '@/lib/categories';
 
 interface EntertainmentArticle {
   _id: string;
@@ -228,7 +229,7 @@ export default function EntertainmentSection() {
 
         {/* Featured Article - Full Width */}
         <div className="mb-8">
-          <Link href={`/${featuredArticle.post_category}/${featuredArticle.post_url}`} className="block group">
+          <Link href={`/${getCategorySlug(featuredArticle.post_category)}/${featuredArticle.post_url}`} className="block group">
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20 hover:border-white/40 transition-all duration-300">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                 <div className="relative h-64 lg:h-80">
@@ -269,7 +270,7 @@ export default function EntertainmentSection() {
         {/* Grid Layout - 8 articles in responsive grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
           {gridArticles.map((article, index) => (
-            <Link key={article._id} href={`/${article.post_category}/${article.post_url}`} className="block group">
+            <Link key={article._id} href={`/${getCategorySlug(article.post_category)}/${article.post_url}`} className="block group">
               <div className="bg-white/10 backdrop-blur-sm rounded-xl overflow-hidden border border-white/20 hover:border-white/40 transition-all duration-300 h-full">
                 <div className="relative h-48">
                   <Image

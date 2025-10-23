@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getAllCategories } from '@/lib/categories';
+import { getAllCategories, getCategorySlug } from '@/lib/categories';
 
 interface Article {
   _id: string;
@@ -110,7 +110,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: category.slug === 'tripura' ? 0.95 : 
              category.slug === 'top-news' ? 0.9 :
              category.slug === 'national' ? 0.85 :
-             category.slug === 'international' ? 0.8 :
+             category.slug === 'world' ? 0.8 :
              category.slug === 'sports' ? 0.8 :
              category.slug === 'finance' ? 0.8 : 0.75,
   }));
@@ -121,7 +121,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.log(`Found ${articles.length} articles for sitemap`); // Debug log
     
     const articleRoutes: MetadataRoute.Sitemap = articles.map(article => ({
-      url: `${baseUrl}/${article.post_category}/${article.post_url}`,
+      url: `${baseUrl}/${getCategorySlug(article.post_category)}/${article.post_url}`,
       lastModified: new Date(article.update_date),
       changeFrequency: 'weekly' as const,
       priority: article.post_category === 'tripura' ? 0.9 : 0.8,

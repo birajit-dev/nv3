@@ -28,7 +28,7 @@ const navigationItems: NavigationItem[] = [
   { id: '1', name: 'Home', slug: '/', color: '#dc2626' },
   { id: '2', name: 'Tripura', slug: '/tripura', color: '#2563eb' },
   { id: '3', name: 'National', slug: '/national', color: '#059669' },
-  { id: '4', name: 'International', slug: '/international', color: '#ea580c' },
+  { id: '4', name: 'International', slug: '/world', color: '#ea580c' },
   { id: '5', name: 'Job/Tenders', slug: '/adstender', color: '#9333ea' },
   { id: '6', name: 'Northeast', slug: '/northeast', color: '#dc2626' },
   { id: '7', name: 'Health', slug: '/health', color: '#0891b2' },

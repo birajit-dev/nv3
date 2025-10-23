@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { format } from 'date-fns';
 import { Clock, User, Eye } from 'lucide-react';
 import { NewsArticle } from '@/types/news';
-import { CATEGORIES } from '@/lib/categories';
+import { CATEGORIES, getCategorySlug } from '@/lib/categories';
 
 interface FeaturedNewsCardProps {
   article: NewsArticle;
@@ -22,7 +22,7 @@ export default function FeaturedNewsCard({
   if (variant === 'hero') {
     return (
       <article className={`relative overflow-hidden bg-gray-900 rounded-lg ${className}`}>
-        <Link href={`/${article.post_category || 'news'}/${article.post_url || article._id}`} className="block">
+        <Link href={`/${getCategorySlug(article.post_category || 'news')}/${article.post_url || article._id}`} className="block">
           {article.post_image && (
             <div className="relative aspect-[16/9] lg:aspect-[21/9]">
               <Image
@@ -87,7 +87,7 @@ export default function FeaturedNewsCard({
   if (variant === 'large') {
     return (
       <article className={`bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow ${className}`}>
-        <Link href={`/${article.post_category || 'news'}/${article.post_url || article._id}`} className="block">
+        <Link href={`/${getCategorySlug(article.post_category || 'news')}/${article.post_url || article._id}`} className="block">
           {article.post_image && (
             <div className="relative aspect-[16/10] overflow-hidden bg-gray-200">
               <Image

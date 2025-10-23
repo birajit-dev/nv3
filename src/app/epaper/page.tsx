@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { format } from 'date-fns';
 import { Calendar, Home, ChevronRight, Newspaper, FileText, Loader2, Sparkles, Cpu, Layout, Palette } from 'lucide-react';
+import { getCategorySlug } from '@/lib/categories';
 import CanvasLayoutGenerator from '@/components/e-paper/CanvasLayoutGenerator';
 import AIImageGenerator from '@/components/e-paper/AIImageGenerator';
 import InteractiveViewer from '@/components/e-paper/InteractiveViewer';
@@ -429,7 +430,7 @@ export default function EPaperPage() {
             {currentPageData.articles.map((article) => (
               <Link
                 key={article._id}
-                href={`/${article.post_category || 'news'}/${article.post_url}`}
+                href={`/${getCategorySlug(article.post_category || 'news')}/${article.post_url}`}
                 className="block p-3 sm:p-4 border border-gray-200 rounded-lg hover:border-blue-300 hover:shadow-sm transition-all duration-200 cursor-pointer"
                 title={`Read: ${article.post_name}`}
               >

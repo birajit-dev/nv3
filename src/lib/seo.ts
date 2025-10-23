@@ -28,7 +28,7 @@ export const CATEGORY_KEYWORDS: Record<string, string[]> = {
     'Bangalore news', 'Chennai news', 'Kolkata news', 'Hyderabad news',
     'Indian government', 'Parliament news', 'Election news'
   ],
-  'international': [
+  'world': [
     'World news', 'International politics', 'Global news', 'Foreign affairs',
     'International relations', 'World economy', 'Global politics'
   ],

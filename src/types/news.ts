@@ -52,7 +52,7 @@ export interface GalleryImage {
 export type CategorySlug = 
   | 'tripura' 
   | 'national' 
-  | 'international' 
+  | 'world' 
   | 'sports' 
   | 'finance' 
   | 'article' 
